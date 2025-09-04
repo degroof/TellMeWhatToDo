@@ -27,6 +27,9 @@ import java.util.UUID;
  * Each task has a unique {@link UUID}.
  * </p>
  */
+
+//TODO: Add a "snooze" feature (a snoozed task would not queue until unsnoozed)
+//TODO: Possibly add a snooze interval (the task would requeue when the snooze interval has passed)
 public class Task
 {
     public static final int REPEAT_TYPE_NONE = 0;
