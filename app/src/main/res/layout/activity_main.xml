@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:visibility="visible"
+    tools:context=".MainActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayoutMain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbarMain"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/black"
+                app:title="@string/title"
+                app:titleTextColor="@android:color/white" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <TextView
+            android:id="@+id/current_task_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:text="@string/no_tasks"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayoutMain"
+            />
+
+        <Button
+            android:id="@+id/button_yes"
+            style="@style/btn_style"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_background_red"
+            android:text="@string/done"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12pt"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_tell"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toBottomOf="@+id/current_task_description"
+            tools:layout_editor_absoluteX="40dp" />
+
+        <Button
+            android:id="@+id/button_tell"
+            style="@style/btn_style"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_background_red"
+            android:text="@string/tell_me"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12pt"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/action_button_layout"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_yes" />
+
+
+        <LinearLayout
+            android:id="@+id/action_button_layout"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/button_add"
+                style="@style/btn_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background_blue"
+                android:text="@string/add_task"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/button_view"
+                style="@style/btn_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_background_blue"
+                android:text="@string/view_tasks"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

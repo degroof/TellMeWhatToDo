@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.TellMeWhatToDo" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/dark_blue</item>
+        <item name="borderColor">@color/white</item>
+        <item name="screenColor">@color/dark_blue</item>
+    </style>
+
+
+
+</resources>

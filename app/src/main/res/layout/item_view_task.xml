@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:background="@drawable/list_background">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkbox_task_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/white"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/textview_task_item_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/white"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="This is a sample task description that might be quite long..." />
+
+    <TextView
+        android:id="@+id/textview_task_item_status"
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        tools:text="Ready" />
+</LinearLayout>

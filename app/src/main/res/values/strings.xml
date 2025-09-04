@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Tell Me What To Do</string>
+    <string name="title">Tell Me What To Do</string>
+    <string name="add_task">Add Task</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="view_tasks">View Tasks</string>
+    <string name="tell_me">OK, I\'m Ready.</string>">
+    <string name="no_tasks">Looks like there\'s nothing to do right now. You could take a break, or maybe add some more tasks.</string>
+    <string name="every">Every</string>
+    <string name="repeats">Repeats </string>
+    <string name="priority">Priority</string>
+    <string name="task_description">Task Description</string>
+    <string name="on">On</string>
+    <string name="at">At</string>">
+    <string name="month">Month</string>
+    <string name="day_of_week">Day of Week</string>
+    <string name="day_of_month">Day of Month</string>
+    <string name="set_time">Set Time</string>
+    <string name="only_after_these_tasks_are_done">Only after these tasks are done</string>
+    <string name="ready_for_another_task">There\'s something for you to do. Ready to go?</string>
+    <string name="add_task_title">Add Task</string>
+    <string name="action_home_title">home</string>
+    <string name="and">and</string>
+    <string name="between">Between</string>
+    <string name="whenever">Whenever</string>
+    <string name="any_time">Clear Time</string>
+    <string name="any_times">Clear Times</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="repeat_unit">Repeat Type</string>
+    <string name="repeat_interval">#</string>
+    <string name="view_tasks_title">View Tasks</string>
+    <string name="done">DONE</string>">
+</resources>
