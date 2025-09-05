@@ -30,6 +30,7 @@ import java.util.UUID;
 
 //TODO: Add a "snooze" feature (a snoozed task would not queue until unsnoozed)
 //TODO: Possibly add a snooze interval (the task would requeue when the snooze interval has passed)
+//TODO: Add support for "M-F" and "Sat&Sun" on daily tasks
 public class Task
 {
     public static final int REPEAT_TYPE_NONE = 0;
@@ -342,6 +343,7 @@ public class Task
         {
             summary += description + "\n";
         }
+        //TODO: Move hardcoded strings to resources
         switch (weight)
         {
             case PRIORITY_LOW:

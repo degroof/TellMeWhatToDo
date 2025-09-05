@@ -84,7 +84,7 @@ public class ViewTaskAdapter extends RecyclerView.Adapter<ViewTaskAdapter.TaskVi
             holder.descriptionTextView.setText(fullDescription);
         }
         Drawable background = holder.itemView.getBackground().mutate();
-
+        //TODO: Move hardcoded strings to resources
         if (background instanceof GradientDrawable) {
             GradientDrawable gradientDrawable = (GradientDrawable) background;
 

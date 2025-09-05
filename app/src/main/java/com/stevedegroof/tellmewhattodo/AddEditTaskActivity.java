@@ -219,6 +219,7 @@ public class AddEditTaskActivity extends ParentActivity
         recyclerViewDependencies.setAdapter(dependencyTaskAdapter);
 
         // Set up priority and repeat unit dropdowns
+        //TODO: Move this array to Util and add lookup methods
         String[] priorities = new String[]{"Low", "Medium", "High", "Urgent"};
         ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(
                 this,
@@ -227,6 +228,7 @@ public class AddEditTaskActivity extends ParentActivity
         );
         autocompletePriority.setAdapter(priorityAdapter);
 
+        //TODO: Move this array to Util and add lookup methods
         String[] repeatUnits = new String[]{"Hour(s)", "Day(s)", "Week(s)", "Month(s)", "Year(s)"};
         ArrayAdapter<String> repeatUnitAdapter = new ArrayAdapter<>(
                 this,
@@ -369,7 +371,7 @@ public class AddEditTaskActivity extends ParentActivity
         boolean isError = false;
         String error = "";
         String summary = "";
-        //description
+        //TODO: Move hardcoded strings to resources
         if (edittextDescription.getEditText() == null || edittextDescription.getEditText().getText().toString().isEmpty())
         {
             isError = true;

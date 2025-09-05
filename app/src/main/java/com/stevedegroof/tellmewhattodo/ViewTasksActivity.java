@@ -124,6 +124,7 @@ public class ViewTasksActivity extends AppCompatActivity
      */
     private void confirmDeleteSelectedTasks()
     {
+        //TODO: Move hardcoded strings to resources
         if (selectedTasksList.isEmpty())
         {
             Toast.makeText(this, "No tasks selected to delete.", Toast.LENGTH_SHORT).show();
@@ -188,6 +189,7 @@ public class ViewTasksActivity extends AppCompatActivity
     private void requeueSelectedTasks()
     {
         //TODO: It only makes sense to requeue non-repeating tasks that are not done. Not sure if it matters, though.
+        //TODO: Move hardcoded strings to resources
         if (selectedTasksList.isEmpty())
         {
             Toast.makeText(this, "No tasks selected to requeue.", Toast.LENGTH_SHORT).show();
