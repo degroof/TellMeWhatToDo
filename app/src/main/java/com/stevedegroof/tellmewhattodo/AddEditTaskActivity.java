@@ -281,12 +281,43 @@ public class AddEditTaskActivity extends ParentActivity
         autocompleteRepeatMonth.setText(Util.getMonthName(taskToAddEdit.getMonth()), false);
         autocompleteRepeatDayOfWeek.setText(Util.getDayOfWeekName(taskToAddEdit.getDayOfWeek()), false);
         autocompleteRepeatDayOfMonth.setText(Util.getDayOfMonthNameShort(taskToAddEdit.getDayOfMonth()), false);
-        buttonRepeatMaxTime.setText(Util.getTimeString(taskToAddEdit.getMaxMinute()));
-        buttonRepeatMinTime.setText(Util.getTimeString(taskToAddEdit.getMinMinute()));
-        buttonRepeatTime.setText(Util.getTimeString(taskToAddEdit.getMinute()));
+        int maxMinute = taskToAddEdit.getMaxMinute();
+        if (maxMinute == Task.END_OF_DAY)
+            buttonRepeatMaxTime.setText(getResources().getString(R.string.set_time));
+        else
+            buttonRepeatMaxTime.setText(Util.getTimeString(maxMinute));
+
+        int minMinute = taskToAddEdit.getMinMinute();
+        if (minMinute == Task.START_OF_DAY)
+            buttonRepeatMinTime.setText(getResources().getString(R.string.set_time));
+        else
+            buttonRepeatMinTime.setText(Util.getTimeString(minMinute));
+
+        int minute = taskToAddEdit.getMinute();
+        if (minute == Task.ANY_TIME)
+            buttonRepeatTime.setText(getResources().getString(R.string.set_time));
+        else
+            buttonRepeatTime.setText(Util.getTimeString(minute));
+
 
         updateRepeatOnFieldsVisibility(repeatType);
+        if(!buttonRepeatTime.getText().toString().equals(getResources().getString(R.string.set_time)))
+        {
+            buttonRepeatAnyTime.setVisibility(View.VISIBLE);
+            buttonRepeatAnyTime.setText(getResources().getString(R.string.any_time));
+        }
 
+        if(!buttonRepeatMinTime.getText().toString().equals(getResources().getString(R.string.set_time)))
+        {
+            buttonRepeatAnyTime.setVisibility(View.VISIBLE);
+            buttonRepeatAnyTime.setText(getResources().getString(R.string.any_times));
+        }
+
+        if(!buttonRepeatMaxTime.getText().toString().equals(getResources().getString(R.string.set_time)))
+        {
+            buttonRepeatAnyTime.setVisibility(View.VISIBLE);
+            buttonRepeatAnyTime.setText(getResources().getString(R.string.any_times));
+        }
 
         dependencyTaskAdapter.notifyDataSetChanged();
     }
@@ -404,13 +435,23 @@ public class AddEditTaskActivity extends ParentActivity
                 {
                     case "Hour(s)":
                         taskToAddEdit.setRepeatType(Task.REPEAT_TYPE_HOURLY);
-                        if (buttonRepeatMinTime.getText() == null || buttonRepeatMinTime.getText().toString().isEmpty() || buttonRepeatMinTime.getText().toString().equals(getResources().getString(R.string.whenever)))
+                        if (buttonRepeatMinTime.getText() == null || buttonRepeatMinTime.getText().toString().isEmpty() || buttonRepeatMinTime.getText().toString().equals(getResources().getString(R.string.set_time)))
                         {
                             taskToAddEdit.setMinMinute(Task.START_OF_DAY);
                         }
-                        if (buttonRepeatMaxTime.getText() == null || buttonRepeatMaxTime.getText().toString().isEmpty() || buttonRepeatMaxTime.getText().toString().equals(getResources().getString(R.string.whenever)))
+                        else
+                        {
+                            String time = buttonRepeatMinTime.getText().toString();
+                            taskToAddEdit.setMinute(Util.getTimeInt(time));
+                        }
+                        if (buttonRepeatMaxTime.getText() == null || buttonRepeatMaxTime.getText().toString().isEmpty() || buttonRepeatMaxTime.getText().toString().equals(getResources().getString(R.string.set_time)))
                         {
                             taskToAddEdit.setMaxMinute(Task.END_OF_DAY);
+                        }
+                        else
+                        {
+                            String time = buttonRepeatMaxTime.getText().toString();
+                            taskToAddEdit.setMinute(Util.getTimeInt(time));
                         }
                         break;
                     case "Day(s)":
@@ -542,6 +583,11 @@ public class AddEditTaskActivity extends ParentActivity
         if (buttonRepeatTime.getText() == null || buttonRepeatTime.getText().toString().isEmpty() || buttonRepeatTime.getText().toString().equals(getResources().getString(R.string.whenever)))
         {
             taskToAddEdit.setMinute(Task.ANY_TIME);
+        }
+        else
+        {
+            String time = buttonRepeatTime.getText().toString();
+            taskToAddEdit.setMinute(Util.getTimeInt(time));
         }
     }
 

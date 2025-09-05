@@ -290,6 +290,7 @@ public class Util
         int minute = minutes%60;
         String ap = (hour < 12) ? "AM" : "PM";
         if (hour > 12) hour -= 12;
+        if (hour == 0) hour = 12;
         return String.format("%02d:%02d %s", hour, minute, ap);
 
     }
@@ -305,5 +306,20 @@ public class Util
     {
         int index= Arrays.asList(DAYS_OF_MONTH).indexOf(string);
         return DAYS_OF_MONTH_INT[index];
+    }
+
+    /**
+     * Converts a time string (e.g., "09:30 AM") to minutes since midnight.
+     *
+     * @param time The time string in "hh:mm AM/PM" format.
+     * @return The number of minutes since midnight.
+     */
+    public static int getTimeInt(String time) {
+        String[] parts = time.split("[:\\s]");
+        int hour = Integer.parseInt(parts[0]);
+        if (time.endsWith("PM") && hour != 12) hour += 12;
+        else if (time.endsWith("AM") && hour == 12) hour = 0;
+        int minute = Integer.parseInt(parts[1]);
+        return hour * 60 + minute;
     }
 }

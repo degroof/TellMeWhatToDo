@@ -363,8 +363,12 @@ public class Task
             {
                 case REPEAT_TYPE_HOURLY:
                     summary += "Repeat: Every " + repeatInterval + " hour(s)\n";
-                    if (minMinute != START_OF_DAY || maxMinute != END_OF_DAY)
+                    if (minMinute != START_OF_DAY && maxMinute != END_OF_DAY)
                         summary += "Between " + Util.getTimeString(minMinute) + " and " + Util.getTimeString(maxMinute) + "\n";
+                    else if (minMinute != START_OF_DAY)
+                        summary += "From " + Util.getTimeString(minMinute) + "\n";
+                    else if (maxMinute != END_OF_DAY)
+                        summary += "Until " + Util.getTimeString(maxMinute) + "\n";
                     break;
                 case REPEAT_TYPE_DAILY:
                     summary += "Repeat: Every " + repeatInterval + " day(s)\n";
