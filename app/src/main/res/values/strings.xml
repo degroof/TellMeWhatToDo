@@ -30,5 +30,224 @@
     <string name="repeat_unit">Repeat Type</string>
     <string name="repeat_interval">#</string>
     <string name="view_tasks_title">View Tasks</string>
-    <string name="done">DONE</string>">
+    <string name="done">DONE</string>
+    <string name="settings_title">Settings</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="restore_failed">Restore Failed</string>
+    <string name="restore_cancelled_or_failed">Restore cancelled or failed.</string>
+    <string name="ok">OK</string>
+    <string name="verify_backup">Verify Backup</string>
+    <string name="found_tasks_in_backup">Found %d tasks in backup. The first four are listed below. Continue with restore?\n%s</string>
+    <string name="cont">Continue</string>
+    <string name="tasks_successfully_restored">Tasks successfully restored.</string>
+    <string name="not_valid_backup_file">This doesn\'t look like a valid task backup file.</string>
+    <string name="timestamp_format">yyyyMMdd_HHmmss</string>
+    <string name="tasks_successfully_backed_up">Tasks successfully backed up to %s in your Download folder. You can used this file to transfer your tasks to another device.</string>
+    <string name="confirm_restore">Confirm Restore</string>
+    <string name="this_will_overwrite">This will overwrite all of your tasks. Are you sure you want to continue?</string>
+     <string name="waiting">Waiting</string>
+    <string name="donemc">Done</string>
+    <string name="ready">Ready</string>
+    <string name="priority_low">Priority: Low\n</string>
+    <string name="priority_medium">Priority: Medium\n</string>
+    <string name="priority_high">Priority: High\n</string>
+    <string name="priority_urgent">Priority: Urgent\n</string>
+    <string name="repeat_every_d_hour_s">Repeat: Every %d hour(s)\n</string>
+    <string name="between_s_and_s">Between %s and %s\n</string>
+    <string name="from_s">From %s\n</string>
+    <string name="until_s">Until %s\n</string>
+    <string name="repeat_every_d_day_s">Repeat: Every %d day(s)\n</string>
+    <string name="repeat_every_d_week_s">Repeat: Every %d week(s)\n</string>
+    <string name="at_s">At %s\n</string>
+    <string name="on_s">On %s\n</string>
+    <string name="repeat_every_d_month_s">Repeat: Every %d month(s)\n</string>
+    <string name="on_the_s">On the %s\n</string>
+    <string name="repeat_every_d_year_s">Repeat: Every %d year(s)\n</string>
+    <string name="in_s">In %s\n</string>
+    <string name="from_time_should_be_earlier_than_to_time">From time should be earlier than To time.\n</string>
+    <string name="description_can_t_be_empty">Description can\'t be empty\n</string>
+    <string name="priority_can_t_be_empty">Priority can\'t be empty\n</string>
+    <string name="repeat_interval_can_t_be_empty">Repeat interval can\'t be empty.\n</string>
+    <string name="repeat_interval_should_be_a_positive_number">Repeat interval should be a positive number.\n</string>
+    <string name="repeat_interval_should_be_a_number">Repeat interval should be a number.\n</string>
+    <string name="repeat_type_can_t_be_empty">Repeat type can\'t be empty.\n</string>
+    <string name="day_of_week_can_t_be_empty">Day of week can\'t be empty.\n</string>
+    <string name="day_of_month_can_t_be_empty">Day of month can\'t be empty.\n</string>
+    <string name="month_can_t_be_empty">Month can\'t be empty.\n</string>
+    <string name="you_want_to">You want to:\n</string>
+    <string name="does_that_look_right">Does that look right?</string>
+    <string name="yep">Yep!</string>
+    <string name="nope">Nope!</string>
+    <string name="success">Success</string>
+    <string name="no_tasks_selected_to_delete">No tasks selected to delete.</string>
+    <string name="confirm_delete">Confirm Delete</string>
+    <string name="are_you_sure_you_want_to_delete_d_task_s">Are you sure you want to delete %d task(s)? This can\'t be undone.</string>
+    <string name="delete">Delete</string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+
+    <string name="Low">Low</string>
+    <string name="Medium">Medium</string>
+    <string name="High">High</string>
+    <string name="Urgent">Urgent</string>
+
+    <string name="repeat_hours">Hour(s)</string>
+    <string name="repeat_days">Day(s)</string>
+    <string name="repeat_weeks">Week(s)</string>
+    <string name="repeat_months">Month(s)</string>
+    <string name="repeat_years">Year(s)</string>
+    <string name="any_month">Any Month</string>
+    <string name="fill_in_at_least">Fill in at least the description and priority fields.</string>
+
+    <string-array name="months_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+
+    <string-array name="days_of_month_short_array">
+        <item>Any Day</item>
+        <item>Last Day</item>
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>4th</item>
+        <item>5th</item>
+        <item>6th</item>
+        <item>7th</item>
+        <item>8th</item>
+        <item>9th</item>
+        <item>10th</item>
+        <item>11th</item>
+        <item>12th</item>
+        <item>13th</item>
+        <item>14th</item>
+        <item>15th</item>
+        <item>16th</item>
+        <item>17th</item>
+        <item>18th</item>
+        <item>19th</item>
+        <item>20th</item>
+        <item>21st</item>
+        <item>22nd</item>
+        <item>23rd</item>
+        <item>24th</item>
+        <item>25th</item>
+        <item>26th</item>
+        <item>27th</item>
+        <item>28th</item>
+    </string-array>
+
+
+    <string-array name="days_of_month_long_array">
+        <item>Any Day</item>
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>4th</item>
+        <item>5th</item>
+        <item>6th</item>
+        <item>7th</item>
+        <item>8th</item>
+        <item>9th</item>
+        <item>10th</item>
+        <item>11th</item>
+        <item>12th</item>
+        <item>13th</item>
+        <item>14th</item>
+        <item>15th</item>
+        <item>16th</item>
+        <item>17th</item>
+        <item>18th</item>
+        <item>19th</item>
+        <item>20th</item>
+        <item>21st</item>
+        <item>22nd</item>
+        <item>23rd</item>
+        <item>24th</item>
+        <item>25th</item>
+        <item>26th</item>
+        <item>27th</item>
+        <item>28th</item>
+        <item>29th</item>
+        <item>30th</item>
+        <item>31st</item>
+    </string-array>
+
+
+    <string-array name="days_of_month_array">
+        <item>Any Day</item>
+        <item>Last Day</item>
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+        <item>4th</item>
+        <item>5th</item>
+        <item>6th</item>
+        <item>7th</item>
+        <item>8th</item>
+        <item>9th</item>
+        <item>10th</item>
+        <item>11th</item>
+        <item>12th</item>
+        <item>13th</item>
+        <item>14th</item>
+        <item>15th</item>
+        <item>16th</item>
+        <item>17th</item>
+        <item>18th</item>
+        <item>19th</item>
+        <item>20th</item>
+        <item>21st</item>
+        <item>22nd</item>
+        <item>23rd</item>
+        <item>24th</item>
+        <item>25th</item>
+        <item>26th</item>
+        <item>27th</item>
+        <item>28th</item>
+        <item>29th</item>
+        <item>30th</item>
+        <item>31st</item>
+    </string-array>
+
+
+    <string-array name="days_of_week_array">
+        <item>Any Day</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
+
+    <string-array name="priority_array">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
+        <item>Urgent</item>
+    </string-array>
+
+    <string-array name="repeat_type_array">
+        <item>Hour(s)</item>
+        <item>Day(s)</item>
+        <item>Week(s)</item>
+        <item>Month(s)</item>
+        <item>Year(s)</item>
+    </string-array>
+
 </resources>

@@ -6,11 +6,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -58,6 +63,8 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbarMain);
+        setSupportActionBar(toolbar);
 
         //Force portrait mode for some phone models
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -146,7 +153,7 @@ public class MainActivity extends AppCompatActivity
      */
     public void buttonTellClick(View view)
     {
-        Task currentTask = Tasks.getInstance().getNextTask();
+        Task currentTask = Tasks.getInstance().getNextTask(getApplicationContext());
         Tasks.getInstance().save(this);
         if (currentTask != null)
         {
@@ -226,7 +233,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void updateUI()
     {
-        int taskCount = Tasks.getInstance().getAvailableTasks().size();
+        int taskCount = Tasks.getInstance().getAvailableTasks(getApplicationContext()).size();
         boolean tasksAvailable = taskCount > 0;
         UUID currentTaskId = Tasks.getInstance().getCurrentTaskId();
         Task currentTask = currentTaskId == null ? null : Tasks.getInstance().getTask(currentTaskId);
@@ -258,6 +265,26 @@ public class MainActivity extends AppCompatActivity
         updateUI();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item)
+    {
+        int id = item.getItemId();
 
+        if (id == R.id.action_settings)
+        {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

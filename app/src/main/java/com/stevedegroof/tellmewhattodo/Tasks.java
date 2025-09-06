@@ -57,12 +57,20 @@ public class Tasks
         return new ArrayList<>(this.tasks.values());
     }
 
-    public List<Task> getAvailableTasks()
+    /**
+     * Retrieves a list of all tasks that are currently available.
+     * A task is considered available if its {@link Task#isAvailable(Context)} method returns true.
+     *
+     * @param context The context to use for checking task availability.
+     * @return A {@link List} of {@link Task} objects that are available.
+     *         Returns an empty list if no tasks are available.
+     */
+    public List<Task> getAvailableTasks(Context context)
     {
         List<Task> availableTasks = new ArrayList<>();
         for (Task task : tasks.values())
         {
-            if (task.isAvailable())
+            if (task.isAvailable(context))
                 availableTasks.add(task);
         }
         return availableTasks;
@@ -75,9 +83,9 @@ public class Tasks
      *
      * @return The next task to be performed, or null if no tasks are available.
      */
-    public Task getNextTask()
+    public Task getNextTask(Context context)
     {
-        List<Task> availableTasks = getAvailableTasks();
+        List<Task> availableTasks = getAvailableTasks(context);
         if (!availableTasks.isEmpty())
         {
             //get the total of all weights
@@ -123,7 +131,6 @@ public class Tasks
      */
     public void load(Context ctx)
     {
-        Gson gson = new Gson();
         String json = "";
         tasks.clear();
         StringBuilder sb;
@@ -142,13 +149,28 @@ public class Tasks
             bufferedReader.close();
             if (!json.isEmpty())
             {
-                Tasks obj = gson.fromJson(json, this.getClass());
-                this.tasks = obj.tasks;
-                this.currentTaskId = obj.currentTaskId;
+                setTasksFromJson(json);
             }
         } catch (Exception e)
         {
         }
+    }
+
+    /**
+     * Sets the tasks from a JSON string.
+     * <p>
+     * This method deserializes a JSON string into a Tasks object using Gson
+     * and updates the current instance's tasks and currentTaskId.
+     * </p>
+     *
+     * @param json The JSON string representing the Tasks object.
+     */
+    public void setTasksFromJson(String json)
+    {
+        Gson gson = new Gson();
+        Tasks obj = gson.fromJson(json, this.getClass());
+        this.tasks = obj.tasks;
+        this.currentTaskId = obj.currentTaskId;
     }
 
 
@@ -166,8 +188,7 @@ public class Tasks
     {
         FileOutputStream outputStream;
 
-        final Gson gson = new Gson();
-        String serializedRecipes = gson.toJson(this, this.getClass());
+        String serializedRecipes = getTasksJson();
 
         try
         {
@@ -178,4 +199,21 @@ public class Tasks
         {
         }
     }
+
+    /**
+     * Converts the current Tasks object into a JSON string.
+     * <p>
+     * This method uses the Gson library to serialize the entire Tasks instance
+     * (including its `tasks` HashMap and `currentTaskId`) into a JSON representation.
+     * </p>
+     *
+     * @return A String containing the JSON representation of the Tasks object.
+     */
+    public String getTasksJson()
+    {
+        Gson gson = new Gson();
+        return gson.toJson(this, this.getClass());
+    }
+
+
 }

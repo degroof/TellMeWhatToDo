@@ -1,6 +1,9 @@
 package com.stevedegroof.tellmewhattodo;
 
-import java.text.SimpleDateFormat;
+import android.content.Context;
+
+import com.google.gson.Gson;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,79 +20,96 @@ import java.util.Date;
  */
 public class Util
 {
-    private static final String[] MONTHS = new String[]{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    private static final String[] DAYS_OF_WEEK = new String[]{"Any Day", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-    private static final String[] DAYS_OF_MONTH_SHORT = new String[]{"Any Day", "Last Day", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th"};
-    private static final String[] DAYS_OF_MONTH_LONG = new String[]{"Any Day", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th","31st"};
     private static final int[] DAYS_OF_MONTH_SHORT_INT = new int[]{Task.ANY_DAY_OF_MONTH, Task.LAST_DAY_OF_MONTH, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28};
     private static final int[] DAYS_OF_MONTH_LONG_INT = new int[]{Task.ANY_DAY_OF_MONTH,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-    private static final String[] DAYS_OF_MONTH = new String[]{"Any Day", "Last Day", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th","31st"};
-    private static final int[] DAYS_OF_MONTH_INT = new int[]{Task.ANY_DAY_OF_MONTH,Task.LAST_DAY_OF_MONTH, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+     private static final int[] DAYS_OF_MONTH_INT = new int[]{Task.ANY_DAY_OF_MONTH,Task.LAST_DAY_OF_MONTH, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
 
-    public static String getMonthName(int month)
+     private static final int[] PRIORITY_INT = new int[]{Task.PRIORITY_LOW, Task.PRIORITY_MEDIUM, Task.PRIORITY_HIGH, Task.PRIORITY_URGENT};
+    private static final int[] REPEAT_TYPE_INT = new int[]{Task.REPEAT_TYPE_HOURLY, Task.REPEAT_TYPE_DAILY, Task.REPEAT_TYPE_WEEKLY, Task.REPEAT_TYPE_MONTHLY, Task.REPEAT_TYPE_YEARLY};
+
+    public static String getMonthName(Context context, int month)
     {
-        return MONTHS[month];
+        if (month == 0) return null;
+        return context.getResources().getStringArray(R.array.months_array)[month-1];
     }
 
-    public static String getDayOfWeekName(int dayOfWeek)
+    public static String getDayOfWeekName(Context context, int dayOfWeek)
     {
-        return DAYS_OF_WEEK[dayOfWeek];
+        return context.getResources().getStringArray(R.array.days_of_week_array)[dayOfWeek];
     }
 
-    public static String getDayOfMonthNameShort(int dayOfMonth)
+    public static String getDayOfMonthNameShort(Context context, int dayOfMonth)
     {
-        return DAYS_OF_MONTH_SHORT[dayOfMonth];
+        int index=-1;
+        for(int i=0;i<DAYS_OF_MONTH_SHORT_INT.length;i++)
+        {
+            if(DAYS_OF_MONTH_SHORT_INT[i]==dayOfMonth)
+            {
+                index=i;
+                break;
+            }
+        }
+        return context.getResources().getStringArray(R.array.days_of_month_short_array)[index];
     }
 
-    public static String getDayOfMonthNameLong(int dayOfMonth)
+    public static String getDayOfMonthNameLong(Context context, int dayOfMonth)
     {
-        return DAYS_OF_MONTH_LONG[dayOfMonth];
+        int index=-1;
+        for(int i=0;i<DAYS_OF_MONTH_LONG_INT.length;i++)
+        {
+            if(DAYS_OF_MONTH_LONG_INT[i]==dayOfMonth)
+            {
+                index=i;
+                break;
+            }
+        }
+        return context.getResources().getStringArray(R.array.days_of_month_long_array)[index];
     }
 
-    public static int getDayOfMonthIntShort(String dayOfMonth)
+    public static int getDayOfMonthIntShort(Context context, String dayOfMonth)
     {
-        int index= Arrays.asList(DAYS_OF_MONTH_SHORT).indexOf(dayOfMonth);
+        int index= Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_short_array)).indexOf(dayOfMonth);
         return DAYS_OF_MONTH_SHORT_INT[index];
     }
 
-    public static int getDayOfMonthIntLong(String dayOfMonth)
+    public static int getDayOfMonthIntLong(Context context, String dayOfMonth)
     {
-        int index= Arrays.asList(DAYS_OF_MONTH_LONG).indexOf(dayOfMonth);
+        int index= Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_long_array)).indexOf(dayOfMonth);
         return DAYS_OF_MONTH_LONG_INT[index];
     }
 
-    public static int getDayOfWeekInt(String dayOfWeek)
+    public static int getDayOfWeekInt(Context context, String dayOfWeek)
     {
-        return Arrays.asList(DAYS_OF_WEEK).indexOf(dayOfWeek);
+        return Arrays.asList(context.getResources().getStringArray(R.array.days_of_week_array)).indexOf(dayOfWeek);
     }
 
-    public static int getMonthInt(String month)
+    public static int getMonthInt(Context context, String month)
     {
-        return Arrays.asList(MONTHS).indexOf(month)+1;
+        return Arrays.asList(context.getResources().getStringArray(R.array.months_array)).indexOf(month)+1;
     }
 
-    public static String[] getMonths()
+    public static String[] getMonths(Context context)
     {
-        return MONTHS;
+        return context.getResources().getStringArray(R.array.months_array);
     }
 
-    public static String[] getDaysOfWeek()
+    public static String[] getDaysOfWeek(Context context)
     {
-        return DAYS_OF_WEEK;
+        return context.getResources().getStringArray(R.array.days_of_week_array);
     }
 
-    public static String[] getDaysOfMonthShort()
+    public static String[] getDaysOfMonthShort(Context context)
     {
-        return DAYS_OF_MONTH_SHORT;
+        return context.getResources().getStringArray(R.array.days_of_month_short_array);
     }
 
-    public static String[] getDaysOfMonthLong()
+    public static String[] getDaysOfMonthLong(Context context)
     {
-        return DAYS_OF_MONTH_LONG;
+        return context.getResources().getStringArray(R.array.days_of_month_long_array);
     }
 
-    public static long getDueTime(Task task)
+    public static long getDueTime(Context context, Task task)
     {
         Calendar due = Calendar.getInstance(); //start with current date and time
         if(task.getLastRun() > 0) due.setTimeInMillis(task.getLastRun()); //if there is a last run, use that instead
@@ -166,7 +186,7 @@ public class Util
      * @param task The task for which to calculate the default last run time.
      * @return The default last run time in milliseconds.
      */
-    public static long getDefaultLastRun(Task task)
+    public static long getDefaultLastRun(Context context, Task task)
     {
         Calendar lastRun = Calendar.getInstance();
         long now = System.currentTimeMillis();
@@ -234,20 +254,20 @@ public class Util
      * Gets a human-readable string representation of a task's priority level.
      *
      * @param weight The integer representation of the task's priority (e.g., Task.PRIORITY_LOW).
-     * @return A string like "Low", "Medium", "High", or "Urgent", or an empty string if the weight is not recognized.
+     * @return A string representing the priority, or an empty string if the weight is not recognized.
      */
-    public static String getPriorityString(int weight)
+    public static String getPriorityString(Context context, int weight)
     {
         switch (weight)
         {
             case Task.PRIORITY_LOW:
-                return "Low";
-                case Task.PRIORITY_MEDIUM:
-                return "Medium";
+                return context.getString(R.string.Low); 
+            case Task.PRIORITY_MEDIUM:
+                return context.getString(R.string.Medium);
             case Task.PRIORITY_HIGH:
-                return "High";
+                return context.getString(R.string.High);
             case Task.PRIORITY_URGENT:
-                return "Urgent";
+                return context.getString(R.string.Urgent);
         }
         return "";
     }
@@ -258,20 +278,20 @@ public class Util
      * @param repeatType The repeat type, as defined in {@link Task}.
      * @return The string representation of the repeat type, or an empty string if the repeat type is invalid.
      */
-    public static String getRepeatTypeString(int repeatType)
+    public static String getRepeatTypeString(Context context, int repeatType)
     {
         switch (repeatType)
         {
             case Task.REPEAT_TYPE_HOURLY:
-                return "Hour(s)";
+                return context.getString(R.string.repeat_hours);
             case Task.REPEAT_TYPE_DAILY:
-                return "Day(s)";
+                return context.getString(R.string.repeat_days);
             case Task.REPEAT_TYPE_WEEKLY:
-                return "Week(s)";
+                return context.getString(R.string.repeat_weeks);
             case Task.REPEAT_TYPE_MONTHLY:
-                return "Month(s)";
+                return context.getString(R.string.repeat_months);
             case Task.REPEAT_TYPE_YEARLY:
-                return "Year(s)";
+                return context.getString(R.string.repeat_years);
         }
         return "";
     }
@@ -283,16 +303,15 @@ public class Util
      *                "Set Time" will be returned.
      * @return A string representation of the time in "hh:mm AM/PM" format, or "Set Time".
      */
-    public static String getTimeString(int minutes)
+    public static String getTimeString(Context context, int minutes)
     {
-        if (minutes == Task.ANY_TIME) return "Set Time";
+        if (minutes == Task.ANY_TIME) return context.getString(R.string.set_time);
         int hour = minutes/60;
         int minute = minutes%60;
-        String ap = (hour < 12) ? "AM" : "PM";
+        String ap = (hour < 12) ? context.getString(R.string.am) : context.getString(R.string.pm);
         if (hour > 12) hour -= 12;
         if (hour == 0) hour = 12;
         return String.format("%02d:%02d %s", hour, minute, ap);
-
     }
 
     /**
@@ -302,9 +321,9 @@ public class Util
      * @param string The string representation of the day of the month.
      * @return The integer representation of the day of the month.
      */
-    public static int getDayOfMonthInt(String string)
+    public static int getDayOfMonthInt(Context context, String string)
     {
-        int index= Arrays.asList(DAYS_OF_MONTH).indexOf(string);
+        int index= Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_array)).indexOf(string);
         return DAYS_OF_MONTH_INT[index];
     }
 
@@ -314,12 +333,55 @@ public class Util
      * @param time The time string in "hh:mm AM/PM" format.
      * @return The number of minutes since midnight.
      */
-    public static int getTimeInt(String time) {
+    public static int getTimeInt(Context context, String time) {
         String[] parts = time.split("[:\\s]");
         int hour = Integer.parseInt(parts[0]);
-        if (time.endsWith("PM") && hour != 12) hour += 12;
-        else if (time.endsWith("AM") && hour == 12) hour = 0;
+        if (time.endsWith(context.getString(R.string.pm)) && hour != 12) hour += 12;
+        else if (time.endsWith(context.getString(R.string.am)) && hour == 12) hour = 0;
         int minute = Integer.parseInt(parts[1]);
         return hour * 60 + minute;
+    }
+
+    /**
+     * Validates a JSON string representing a list of tasks and extracts their descriptions.
+     *
+     * This method first checks if the JSON string contains the key `"tasks":`.
+     * If not, or if any other parsing error occurs, it throws an {@link IllegalArgumentException}.
+     * Otherwise, it parses the JSON into a {@link Tasks} object and concatenates the
+     * descriptions of all tasks, separated by "||".
+     *
+     * @param json The JSON string to validate and parse.
+     * @return A string containing all task descriptions, separated by "||".
+     * @throws IllegalArgumentException If the JSON string is invalid or does not contain the "tasks" key.
+     */
+    public static String validateJson(Context context, String json)
+    {
+        try
+        {
+            if (!json.contains("\"tasks\":"))
+            {
+                throw new IllegalArgumentException("Invalid JSON");
+            }
+            Tasks tasks = new Gson().fromJson(json, Tasks.class);
+            String descriptions = "";
+            for (Task task : tasks.getTasks())
+                descriptions += task.getDescription() + "||";
+            return descriptions;
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("Invalid JSON");
+        }
+    }
+
+    public static int getPriorityInt(Context context,String priority)
+    {
+        int index= Arrays.asList(context.getResources().getStringArray(R.array.priority_array)).indexOf(priority);
+        return PRIORITY_INT[index];
+    }
+
+    public static int getRepeatTypeInt(Context applicationContext, String repeatType) {
+        int index= Arrays.asList(applicationContext.getResources().getStringArray(R.array.repeat_type_array)).indexOf(repeatType);
+        return Util.REPEAT_TYPE_INT[index];
     }
 }

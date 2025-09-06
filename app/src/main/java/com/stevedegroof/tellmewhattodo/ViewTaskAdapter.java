@@ -1,5 +1,6 @@
 package com.stevedegroof.tellmewhattodo; // Your package name
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -75,6 +77,7 @@ public class ViewTaskAdapter extends RecyclerView.Adapter<ViewTaskAdapter.TaskVi
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task currentTask = tasksList.get(position);
+        Context context = holder.itemView.getContext();
 
         String fullDescription = currentTask.getDescription();
         int maxLength = 50;
@@ -84,30 +87,29 @@ public class ViewTaskAdapter extends RecyclerView.Adapter<ViewTaskAdapter.TaskVi
             holder.descriptionTextView.setText(fullDescription);
         }
         Drawable background = holder.itemView.getBackground().mutate();
-        //TODO: Move hardcoded strings to resources
         if (background instanceof GradientDrawable) {
             GradientDrawable gradientDrawable = (GradientDrawable) background;
 
             if (currentTask.isDone()) {
-                holder.statusTextView.setText("Done");
+                holder.statusTextView.setText(R.string.donemc);
                 gradientDrawable.setColor(Color.RED);
-            } else if (!currentTask.isAvailable()) {
-                holder.statusTextView.setText("Waiting");
-                gradientDrawable.setColor(Color.parseColor("#FFA500")); // Orange
+            } else if (!currentTask.isAvailable(context)) {
+                holder.statusTextView.setText(R.string.waiting);
+                gradientDrawable.setColor(ContextCompat.getColor(context, R.color.orange));
             } else {
-                holder.statusTextView.setText("Ready");
-                gradientDrawable.setColor(Color.parseColor("#4CAF50")); // Green
+                holder.statusTextView.setText(R.string.ready);
+                gradientDrawable.setColor(ContextCompat.getColor(context, R.color.green));
             }
         } else {
             if (currentTask.isDone()) {
-                holder.statusTextView.setText("Done");
+                holder.statusTextView.setText(R.string.donemc);
                 holder.itemView.setBackgroundColor(Color.RED);
-            } else if (!currentTask.isAvailable()) {
-                holder.statusTextView.setText("Waiting");
-                holder.itemView.setBackgroundColor(Color.parseColor("#FFA500")); // Orange
+            } else if (!currentTask.isAvailable(context)) {
+                holder.statusTextView.setText(R.string.waiting);
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.orange));
             } else {
-                holder.statusTextView.setText("Ready");
-                holder.itemView.setBackgroundColor(Color.parseColor("#4CAF50")); // Green
+                holder.statusTextView.setText(R.string.ready);
+                holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
             }
         }
 

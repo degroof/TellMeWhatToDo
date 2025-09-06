@@ -1,5 +1,7 @@
 package com.stevedegroof.tellmewhattodo;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -202,13 +204,13 @@ public class Task
      *
      * @return {@code true} if the task is available, {@code false} otherwise.
      */
-    public boolean isAvailable()
+    public boolean isAvailable(Context context)
     {
         //TODO: Need to test all possible combinations of repeating anf non-repeating task dependencies
         boolean available = !done; //if done, not available
         if (repeatType != REPEAT_TYPE_NONE) //unless it repeats, then look at due date/time
         {
-            long due = Util.getDueTime(this);
+            long due = Util.getDueTime(context,this);
             long now = System.currentTimeMillis();
             available = (due <= now);
         }
@@ -336,27 +338,26 @@ public class Task
      *
      * @return A string containing the task summary.
      */
-    public String getSummary()
+    public String getSummary(Context context)
     {
         String summary = "";
         if (description != null && !description.isEmpty())
         {
             summary += description + "\n";
         }
-        //TODO: Move hardcoded strings to resources
         switch (weight)
         {
             case PRIORITY_LOW:
-                summary += "Priority: Low\n";
+                summary += context.getString(R.string.priority_low);
                 break;
             case PRIORITY_MEDIUM:
-                summary += "Priority: Medium\n";
+                summary += context.getString(R.string.priority_medium);
                 break;
             case PRIORITY_HIGH:
-                summary += "Priority: High\n";
+                summary += context.getString(R.string.priority_high);
                 break;
             case PRIORITY_URGENT:
-                summary += "Priority: Urgent\n";
+                summary += context.getString(R.string.priority_urgent);
                 break;
         }
         if (repeatType != REPEAT_TYPE_NONE)
@@ -364,41 +365,41 @@ public class Task
             switch (repeatType)
             {
                 case REPEAT_TYPE_HOURLY:
-                    summary += "Repeat: Every " + repeatInterval + " hour(s)\n";
+                    summary += String.format(context.getString(R.string.repeat_every_d_hour_s), repeatInterval);
                     if (minMinute != START_OF_DAY && maxMinute != END_OF_DAY)
-                        summary += "Between " + Util.getTimeString(minMinute) + " and " + Util.getTimeString(maxMinute) + "\n";
+                        summary += String.format(context.getString(R.string.between_s_and_s), Util.getTimeString(context,minMinute), Util.getTimeString(context,maxMinute));
                     else if (minMinute != START_OF_DAY)
-                        summary += "From " + Util.getTimeString(minMinute) + "\n";
+                        summary += String.format(context.getString(R.string.from_s), Util.getTimeString(context,minMinute));
                     else if (maxMinute != END_OF_DAY)
-                        summary += "Until " + Util.getTimeString(maxMinute) + "\n";
+                        summary += String.format(context.getString(R.string.until_s), Util.getTimeString(context,maxMinute));
                     break;
                 case REPEAT_TYPE_DAILY:
-                    summary += "Repeat: Every " + repeatInterval + " day(s)\n";
+                    summary += String.format(context.getString(R.string.repeat_every_d_day_s), repeatInterval);
                     if (minute != ANY_TIME)
-                        summary += "At " + Util.getTimeString(minute) + "\n";
+                        summary += String.format(context.getString(R.string.at_s), Util.getTimeString(context,minute));
                     break;
                 case REPEAT_TYPE_WEEKLY:
-                    summary += "Repeat: Every " + repeatInterval + " week(s)\n";
+                    summary += String.format(context.getString(R.string.repeat_every_d_week_s), repeatInterval);
                     if (dayOfWeek != ANY_DAY_OF_WEEK)
-                        summary += "On " + Util.getDayOfWeekName(dayOfWeek) + "\n";
+                        summary += String.format(context.getString(R.string.on_s), Util.getDayOfWeekName(context,dayOfWeek));
                     if (minute != ANY_TIME)
-                        summary += "At " + Util.getTimeString(minute) + "\n";
+                        summary += String.format(context.getString(R.string.at_s), Util.getTimeString(context,minute));
                     break;
                 case REPEAT_TYPE_MONTHLY:
-                    summary += "Repeat: Every " + repeatInterval + " month(s)\n";
+                    summary += String.format(context.getString(R.string.repeat_every_d_month_s), repeatInterval);
                     if (dayOfMonth != ANY_DAY_OF_MONTH)
-                        summary += "On the " + Util.getDayOfMonthNameShort(dayOfMonth) + "\n";
+                        summary += String.format(context.getString(R.string.on_the_s), Util.getDayOfMonthNameShort(context,dayOfMonth));
                     if (minute != ANY_TIME)
-                        summary += "At " + Util.getTimeString(minute) + "\n";
+                        summary += String.format(context.getString(R.string.at_s), Util.getTimeString(context,minute));
                     break;
                 case REPEAT_TYPE_YEARLY:
-                    summary += "Repeat: Every " + repeatInterval + " year(s)\n";
+                    summary += String.format(context.getString(R.string.repeat_every_d_year_s), repeatInterval);
                     if (dayOfMonth != ANY_DAY_OF_MONTH)
-                        summary += "On the " + Util.getDayOfMonthNameShort(dayOfMonth) + "\n";
+                        summary += String.format(context.getString(R.string.on_the_s), Util.getDayOfMonthNameShort(context,dayOfMonth));
                     if (month != ANY_MONTH)
-                        summary += "In " + Util.getMonthName(month) + "\n";
+                        summary += String.format(context.getString(R.string.in_s), Util.getMonthName(context,month));
                     if (minute != ANY_TIME)
-                        summary += "At " + Util.getTimeString(minute) + "\n";
+                        summary += String.format(context.getString(R.string.at_s), Util.getTimeString(context,minute));
                     break;
             }
         }

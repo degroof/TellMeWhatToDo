@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,9 +25,8 @@ import java.util.List;
  * - Navigate to add a new task.
  * - Navigate to edit an existing task.
  */
-public class ViewTasksActivity extends AppCompatActivity
+public class ViewTasksActivity extends ParentActivity
 {
-    //TODO: Add import/export functionality (should load or save the tasks json data to/from the downloads folder)
     private RecyclerView recyclerViewAllTasks;
     private ViewTaskAdapter viewTaskAdapter;
     private List<Task> allTasksList;
@@ -44,6 +43,8 @@ public class ViewTasksActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_tasks);
+        Toolbar toolbar = findViewById(R.id.toolbarViewTasks);
+        setSupportActionBar(toolbar);
 
         // Initialize UI components
         recyclerViewAllTasks = findViewById(R.id.recycler_view_all_tasks);
@@ -127,16 +128,16 @@ public class ViewTasksActivity extends AppCompatActivity
         //TODO: Move hardcoded strings to resources
         if (selectedTasksList.isEmpty())
         {
-            Toast.makeText(this, "No tasks selected to delete.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.no_tasks_selected_to_delete, Toast.LENGTH_SHORT).show();
             return;
         }
 
 
         new AlertDialog.Builder(this, R.style.CustomAlertDialogTheme)
-                .setTitle("Confirm Delete")
-                .setMessage("Are you sure you want to delete " + selectedTasksList.size() + " task(s)? This can't be undone.")
-                .setPositiveButton("Delete", (dialog, which) -> deleteSelectedTasks())
-                .setNegativeButton("Cancel", null)
+                .setTitle(R.string.confirm_delete)
+                .setMessage(String.format(getString(R.string.are_you_sure_you_want_to_delete_d_task_s), selectedTasksList.size()))
+                .setPositiveButton(R.string.delete, (dialog, which) -> deleteSelectedTasks())
+                .setNegativeButton(R.string.cancel, null)
                 .show();
     }
 
