@@ -385,6 +385,8 @@ public class AddEditTaskActivity extends ParentActivity
         boolean isError = false;
         String error = "";
         String summary = "";
+        String repeatType = null;
+        int repeatTypeInt = Task.REPEAT_TYPE_NONE;
         if (edittextDescription.getEditText() == null || edittextDescription.getEditText().getText().toString().isEmpty())
         {
             isError = true;
@@ -430,8 +432,8 @@ public class AddEditTaskActivity extends ParentActivity
                 error += getString(R.string.repeat_type_can_t_be_empty);
             } else
             {
-                String repeatType = autocompleteRepeatUnit.getText().toString();
-                int repeatTypeInt = Util.getRepeatTypeInt(getApplicationContext(), repeatType);
+                repeatType = autocompleteRepeatUnit.getText().toString();
+                repeatTypeInt = Util.getRepeatTypeInt(getApplicationContext(), repeatType);
                 switch (repeatTypeInt)
                 {
                     case Task.REPEAT_TYPE_HOURLY:
@@ -515,11 +517,26 @@ public class AddEditTaskActivity extends ParentActivity
         } else taskToAddEdit.setRepeatType(Task.REPEAT_TYPE_NONE);
         int maxTime = taskToAddEdit.getMaxMinute();
         int minTime = taskToAddEdit.getMinMinute();
-        if (minTime >= maxTime)
+        if (repeatTypeInt == Task.REPEAT_TYPE_HOURLY && minTime >= maxTime)
         {
             isError = true;
             error += getString(R.string.from_time_should_be_earlier_than_to_time);
         }
+        if (repeatTypeInt == Task.REPEAT_TYPE_YEARLY && autocompleteRepeatDayOfMonth.getText() != null
+                && !autocompleteRepeatDayOfMonth.getText().toString().isEmpty() && autocompleteRepeatMonth.getText() != null
+                && !autocompleteRepeatMonth.getText().toString().isEmpty())
+        {
+            String dayOfMonthStr = autocompleteRepeatDayOfMonth.getText().toString();
+            String monthStr = autocompleteRepeatMonth.getText().toString();
+            int dayOfMonth = Util.getDayOfMonthInt(getApplicationContext(), dayOfMonthStr);
+            int month = Util.getMonthInt(getApplicationContext(), monthStr);
+            if(!Util.isDayOfMonthValid(dayOfMonth, month))
+            {
+                isError = true;
+                error += String.format(getString(R.string.invalid_day_of_month), monthStr, dayOfMonthStr);
+            }
+        }
+
         if (isError)
         {
             new AlertDialog.Builder(this, R.style.CustomAlertDialogTheme)

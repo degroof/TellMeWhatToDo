@@ -21,17 +21,17 @@ import java.util.Date;
 public class Util
 {
 
-    private static final int[] DAYS_OF_MONTH_SHORT_INT = new int[]{Task.ANY_DAY_OF_MONTH, Task.LAST_DAY_OF_MONTH, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28};
-    private static final int[] DAYS_OF_MONTH_LONG_INT = new int[]{Task.ANY_DAY_OF_MONTH,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
-     private static final int[] DAYS_OF_MONTH_INT = new int[]{Task.ANY_DAY_OF_MONTH,Task.LAST_DAY_OF_MONTH, 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+    private static final int[] DAYS_OF_MONTH_SHORT_INT = new int[]{Task.ANY_DAY_OF_MONTH, Task.LAST_DAY_OF_MONTH, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28};
+    private static final int[] DAYS_OF_MONTH_LONG_INT = new int[]{Task.ANY_DAY_OF_MONTH, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+    private static final int[] DAYS_OF_MONTH_INT = new int[]{Task.ANY_DAY_OF_MONTH, Task.LAST_DAY_OF_MONTH, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
 
-     private static final int[] PRIORITY_INT = new int[]{Task.PRIORITY_LOW, Task.PRIORITY_MEDIUM, Task.PRIORITY_HIGH, Task.PRIORITY_URGENT};
+    private static final int[] PRIORITY_INT = new int[]{Task.PRIORITY_LOW, Task.PRIORITY_MEDIUM, Task.PRIORITY_HIGH, Task.PRIORITY_URGENT};
     private static final int[] REPEAT_TYPE_INT = new int[]{Task.REPEAT_TYPE_HOURLY, Task.REPEAT_TYPE_DAILY, Task.REPEAT_TYPE_WEEKLY, Task.REPEAT_TYPE_MONTHLY, Task.REPEAT_TYPE_YEARLY};
 
     public static String getMonthName(Context context, int month)
     {
         if (month == 0) return null;
-        return context.getResources().getStringArray(R.array.months_array)[month-1];
+        return context.getResources().getStringArray(R.array.months_array)[month - 1];
     }
 
     public static String getDayOfWeekName(Context context, int dayOfWeek)
@@ -41,12 +41,12 @@ public class Util
 
     public static String getDayOfMonthNameShort(Context context, int dayOfMonth)
     {
-        int index=-1;
-        for(int i=0;i<DAYS_OF_MONTH_SHORT_INT.length;i++)
+        int index = -1;
+        for (int i = 0; i < DAYS_OF_MONTH_SHORT_INT.length; i++)
         {
-            if(DAYS_OF_MONTH_SHORT_INT[i]==dayOfMonth)
+            if (DAYS_OF_MONTH_SHORT_INT[i] == dayOfMonth)
             {
-                index=i;
+                index = i;
                 break;
             }
         }
@@ -55,12 +55,12 @@ public class Util
 
     public static String getDayOfMonthNameLong(Context context, int dayOfMonth)
     {
-        int index=-1;
-        for(int i=0;i<DAYS_OF_MONTH_LONG_INT.length;i++)
+        int index = -1;
+        for (int i = 0; i < DAYS_OF_MONTH_LONG_INT.length; i++)
         {
-            if(DAYS_OF_MONTH_LONG_INT[i]==dayOfMonth)
+            if (DAYS_OF_MONTH_LONG_INT[i] == dayOfMonth)
             {
-                index=i;
+                index = i;
                 break;
             }
         }
@@ -69,13 +69,13 @@ public class Util
 
     public static int getDayOfMonthIntShort(Context context, String dayOfMonth)
     {
-        int index= Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_short_array)).indexOf(dayOfMonth);
+        int index = Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_short_array)).indexOf(dayOfMonth);
         return DAYS_OF_MONTH_SHORT_INT[index];
     }
 
     public static int getDayOfMonthIntLong(Context context, String dayOfMonth)
     {
-        int index= Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_long_array)).indexOf(dayOfMonth);
+        int index = Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_long_array)).indexOf(dayOfMonth);
         return DAYS_OF_MONTH_LONG_INT[index];
     }
 
@@ -86,7 +86,7 @@ public class Util
 
     public static int getMonthInt(Context context, String month)
     {
-        return Arrays.asList(context.getResources().getStringArray(R.array.months_array)).indexOf(month)+1;
+        return Arrays.asList(context.getResources().getStringArray(R.array.months_array)).indexOf(month) + 1;
     }
 
     public static String[] getMonths(Context context)
@@ -112,9 +112,10 @@ public class Util
     public static long getDueTime(Context context, Task task)
     {
         Calendar due = Calendar.getInstance(); //start with current date and time
-        if(task.getLastRun() > 0) due.setTimeInMillis(task.getLastRun()); //if there is a last run, use that instead
-        int minute = (task.getMinute()==Task.ANY_TIME)?0:task.getMinute()%60;
-        int hour = (task.getMinute()==Task.ANY_TIME)?0:task.getMinute()/60;
+        if (task.getLastRun() > 0)
+            due.setTimeInMillis(task.getLastRun()); //if there is a last run, use that instead
+        int minute = (task.getMinute() == Task.ANY_TIME) ? 0 : task.getMinute() % 60;
+        int hour = (task.getMinute() == Task.ANY_TIME) ? 0 : task.getMinute() / 60;
         int dayOfMonth = task.getDayOfMonth();
         int dayOfWeek = task.getDayOfWeek();
         switch (task.getRepeatType())
@@ -122,17 +123,16 @@ public class Util
             case Task.REPEAT_TYPE_HOURLY: //repeating 1 or more hours
                 //add the number of hours
                 due.add(Calendar.HOUR, task.getRepeatInterval());
-                int dueMinute = due.get(Calendar.HOUR_OF_DAY)*60+due.get(Calendar.MINUTE);
+                int dueMinute = due.get(Calendar.HOUR_OF_DAY) * 60 + due.get(Calendar.MINUTE);
                 if (dueMinute > task.getMaxMinute()) //if after the end of the day, go to next day
                 {
                     due.add(Calendar.DAY_OF_MONTH, 1);
-                    due.set(Calendar.HOUR_OF_DAY, task.getMinMinute()/60);
-                    due.set(Calendar.MINUTE, task.getMinMinute()%60);
-                }
-                else if(dueMinute < task.getMinMinute()) //if before the start of the day, set to start of day
+                    due.set(Calendar.HOUR_OF_DAY, task.getMinMinute() / 60);
+                    due.set(Calendar.MINUTE, task.getMinMinute() % 60);
+                } else if (dueMinute < task.getMinMinute()) //if before the start of the day, set to start of day
                 {
-                    due.set(Calendar.HOUR_OF_DAY, task.getMinMinute()/60);
-                    due.set(Calendar.MINUTE, task.getMinMinute()%60);
+                    due.set(Calendar.HOUR_OF_DAY, task.getMinMinute() / 60);
+                    due.set(Calendar.MINUTE, task.getMinMinute() % 60);
                 }
                 break;
             case Task.REPEAT_TYPE_DAILY: //repeating 1 or more days
@@ -142,7 +142,8 @@ public class Util
                 break;
             case Task.REPEAT_TYPE_WEEKLY: //repeating 1 or more weeks
                 due.add(Calendar.WEEK_OF_YEAR, task.getRepeatInterval());
-                if (dayOfWeek != Task.ANY_DAY_OF_WEEK) due.set(Calendar.DAY_OF_WEEK, task.getDayOfWeek());
+                if (dayOfWeek != Task.ANY_DAY_OF_WEEK)
+                    due.set(Calendar.DAY_OF_WEEK, task.getDayOfWeek());
                 due.set(Calendar.HOUR_OF_DAY, hour);
                 due.set(Calendar.MINUTE, minute);
                 break;
@@ -196,52 +197,52 @@ public class Util
             case Task.REPEAT_TYPE_HOURLY:
                 break;
             case Task.REPEAT_TYPE_DAILY:
-                if(task.getMinute()!=Task.ANY_TIME)
+                if (task.getMinute() != Task.ANY_TIME)
                 {
-                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute()/60);
-                    lastRun.set(Calendar.MINUTE, task.getMinute()%60);
-                    lastRun.add(Calendar.DAY_OF_MONTH, ((lastRun.getTimeInMillis() > now)?0:1)-interval);
+                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute() / 60);
+                    lastRun.set(Calendar.MINUTE, task.getMinute() % 60);
+                    lastRun.add(Calendar.DAY_OF_MONTH, ((lastRun.getTimeInMillis() > now) ? 0 : 1) - interval);
                 }
                 break;
             case Task.REPEAT_TYPE_WEEKLY:
-                if(task.getMinute()!=Task.ANY_TIME)
+                if (task.getMinute() != Task.ANY_TIME)
                 {
-                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute()/60);
-                    lastRun.set(Calendar.MINUTE, task.getMinute()%60);
+                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute() / 60);
+                    lastRun.set(Calendar.MINUTE, task.getMinute() % 60);
                 }
-                if(task.getDayOfWeek()!=Task.ANY_DAY_OF_WEEK)
+                if (task.getDayOfWeek() != Task.ANY_DAY_OF_WEEK)
                 {
                     lastRun.set(Calendar.DAY_OF_WEEK, task.getDayOfWeek());
                 }
-                lastRun.add(Calendar.WEEK_OF_YEAR, ((lastRun.getTimeInMillis() > now)?0:1)-interval);
+                lastRun.add(Calendar.WEEK_OF_YEAR, ((lastRun.getTimeInMillis() > now) ? 0 : 1) - interval);
                 break;
             case Task.REPEAT_TYPE_MONTHLY:
-                if(task.getMinute()!=Task.ANY_TIME)
+                if (task.getMinute() != Task.ANY_TIME)
                 {
-                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute()/60);
-                    lastRun.set(Calendar.MINUTE, task.getMinute()%60);
+                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute() / 60);
+                    lastRun.set(Calendar.MINUTE, task.getMinute() % 60);
                 }
-                if(task.getDayOfMonth()!=Task.ANY_DAY_OF_MONTH)
+                if (task.getDayOfMonth() != Task.ANY_DAY_OF_MONTH)
                 {
                     lastRun.set(Calendar.DAY_OF_MONTH, task.getDayOfMonth());
                 }
-                lastRun.add(Calendar.MONTH, ((lastRun.getTimeInMillis() > now)?0:1)-interval);
+                lastRun.add(Calendar.MONTH, ((lastRun.getTimeInMillis() > now) ? 0 : 1) - interval);
                 break;
             case Task.REPEAT_TYPE_YEARLY:
-                if(task.getMinute()!=Task.ANY_TIME)
+                if (task.getMinute() != Task.ANY_TIME)
                 {
-                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute()/60);
-                    lastRun.set(Calendar.MINUTE, task.getMinute()%60);
+                    lastRun.set(Calendar.HOUR_OF_DAY, task.getMinute() / 60);
+                    lastRun.set(Calendar.MINUTE, task.getMinute() % 60);
                 }
-                if(task.getDayOfMonth()!=Task.ANY_DAY_OF_MONTH)
+                if (task.getDayOfMonth() != Task.ANY_DAY_OF_MONTH)
                 {
                     lastRun.set(Calendar.DAY_OF_MONTH, task.getDayOfMonth());
                 }
-                if(task.getMonth()!=Task.ANY_MONTH)
+                if (task.getMonth() != Task.ANY_MONTH)
                 {
                     lastRun.set(Calendar.MONTH, task.getMonth());
                 }
-                lastRun.add(Calendar.YEAR, ((lastRun.getTimeInMillis() > now)?0:1)-interval);
+                lastRun.add(Calendar.YEAR, ((lastRun.getTimeInMillis() > now) ? 0 : 1) - interval);
                 break;
             default:
                 break;
@@ -261,7 +262,7 @@ public class Util
         switch (weight)
         {
             case Task.PRIORITY_LOW:
-                return context.getString(R.string.Low); 
+                return context.getString(R.string.Low);
             case Task.PRIORITY_MEDIUM:
                 return context.getString(R.string.Medium);
             case Task.PRIORITY_HIGH:
@@ -306,8 +307,8 @@ public class Util
     public static String getTimeString(Context context, int minutes)
     {
         if (minutes == Task.ANY_TIME) return context.getString(R.string.set_time);
-        int hour = minutes/60;
-        int minute = minutes%60;
+        int hour = minutes / 60;
+        int minute = minutes % 60;
         String ap = (hour < 12) ? context.getString(R.string.am) : context.getString(R.string.pm);
         if (hour > 12) hour -= 12;
         if (hour == 0) hour = 12;
@@ -323,7 +324,7 @@ public class Util
      */
     public static int getDayOfMonthInt(Context context, String string)
     {
-        int index= Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_array)).indexOf(string);
+        int index = Arrays.asList(context.getResources().getStringArray(R.array.days_of_month_array)).indexOf(string);
         return DAYS_OF_MONTH_INT[index];
     }
 
@@ -333,7 +334,8 @@ public class Util
      * @param time The time string in "hh:mm AM/PM" format.
      * @return The number of minutes since midnight.
      */
-    public static int getTimeInt(Context context, String time) {
+    public static int getTimeInt(Context context, String time)
+    {
         String[] parts = time.split("[:\\s]");
         int hour = Integer.parseInt(parts[0]);
         if (time.endsWith(context.getString(R.string.pm)) && hour != 12) hour += 12;
@@ -344,7 +346,7 @@ public class Util
 
     /**
      * Validates a JSON string representing a list of tasks and extracts their descriptions.
-     *
+     * <p>
      * This method first checks if the JSON string contains the key `"tasks":`.
      * If not, or if any other parsing error occurs, it throws an {@link IllegalArgumentException}.
      * Otherwise, it parses the JSON into a {@link Tasks} object and concatenates the
@@ -367,21 +369,48 @@ public class Util
             for (Task task : tasks.getTasks())
                 descriptions += task.getDescription() + "||";
             return descriptions;
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             throw new IllegalArgumentException("Invalid JSON");
         }
     }
 
-    public static int getPriorityInt(Context context,String priority)
+    public static int getPriorityInt(Context context, String priority)
     {
-        int index= Arrays.asList(context.getResources().getStringArray(R.array.priority_array)).indexOf(priority);
+        int index = Arrays.asList(context.getResources().getStringArray(R.array.priority_array)).indexOf(priority);
         return PRIORITY_INT[index];
     }
 
-    public static int getRepeatTypeInt(Context applicationContext, String repeatType) {
-        int index= Arrays.asList(applicationContext.getResources().getStringArray(R.array.repeat_type_array)).indexOf(repeatType);
+    public static int getRepeatTypeInt(Context applicationContext, String repeatType)
+    {
+        int index = Arrays.asList(applicationContext.getResources().getStringArray(R.array.repeat_type_array)).indexOf(repeatType);
         return Util.REPEAT_TYPE_INT[index];
+    }
+
+    public static boolean isDayOfMonthValid(int dayOfMonth, int month)
+    {
+        if (month == Task.ANY_MONTH || dayOfMonth == Task.ANY_DAY_OF_MONTH || dayOfMonth == Task.LAST_DAY_OF_MONTH)
+            return true;
+        switch (month)
+        {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                return true;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                return dayOfMonth <= 30;
+            case 2:
+                return dayOfMonth <= 29;
+            default:
+                return false;
+        }
+
     }
 }

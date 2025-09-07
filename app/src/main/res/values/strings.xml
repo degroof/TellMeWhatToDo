@@ -99,6 +99,7 @@
     <string name="repeat_years">Year(s)</string>
     <string name="any_month">Any Month</string>
     <string name="fill_in_at_least">Fill in at least the description and priority fields.</string>
+    <string name="invalid_day_of_month">%s %s isn\'t valid.\n</string>
 
     <string-array name="months_array">
         <item>January</item>
