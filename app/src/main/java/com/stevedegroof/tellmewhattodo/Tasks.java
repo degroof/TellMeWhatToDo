@@ -188,12 +188,12 @@ public class Tasks
     {
         FileOutputStream outputStream;
 
-        String serializedRecipes = getTasksJson();
+        String serializedTasks = getTasksJson();
 
         try
         {
             outputStream = ctx.openFileOutput(TASKS_FILE_NAME, Context.MODE_PRIVATE);
-            outputStream.write(serializedRecipes.getBytes());
+            outputStream.write(serializedTasks.getBytes());
             outputStream.close();
         } catch (Exception e)
         {

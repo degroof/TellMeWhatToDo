@@ -160,7 +160,7 @@ public class Util
                 break;
             case Task.REPEAT_TYPE_YEARLY: //repeating 1 or more years
                 due.add(Calendar.YEAR, task.getRepeatInterval());
-                due.set(Calendar.MONTH, task.getMonth());
+                due.set(Calendar.MONTH, task.getMonth()-1);
                 if (dayOfMonth == Task.LAST_DAY_OF_MONTH) //if last day of month, end of month
                     dayOfMonth = due.getActualMaximum(Calendar.DAY_OF_MONTH);
                 else if (dayOfMonth != Task.ANY_DAY_OF_MONTH) //if not any day, use day
@@ -240,7 +240,7 @@ public class Util
                 }
                 if (task.getMonth() != Task.ANY_MONTH)
                 {
-                    lastRun.set(Calendar.MONTH, task.getMonth());
+                    lastRun.set(Calendar.MONTH, task.getMonth()-1);
                 }
                 lastRun.add(Calendar.YEAR, ((lastRun.getTimeInMillis() > now) ? 0 : 1) - interval);
                 break;
